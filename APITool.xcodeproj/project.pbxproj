@@ -9,19 +9,23 @@
 /* Begin PBXBuildFile section */
 		45177EBD1BF1CB7C00D6A8AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45177EBC1BF1CB7C00D6A8AC /* AppDelegate.swift */; };
 		45177EBF1BF1CB7C00D6A8AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45177EBE1BF1CB7C00D6A8AC /* ViewController.swift */; };
-		45177EC21BF1CB7C00D6A8AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45177EC01BF1CB7C00D6A8AC /* Main.storyboard */; };
 		45177EC41BF1CB7C00D6A8AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45177EC31BF1CB7C00D6A8AC /* Assets.xcassets */; };
 		45177EC71BF1CB7C00D6A8AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45177EC51BF1CB7C00D6A8AC /* LaunchScreen.storyboard */; };
+		45177ED11BF1D59200D6A8AC /* APIMethodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45177ED01BF1D59200D6A8AC /* APIMethodTableViewCell.swift */; };
+		45177ED31BF1D74500D6A8AC /* APIURLTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45177ED21BF1D74500D6A8AC /* APIURLTableViewCell.swift */; };
+		45177ED51BF1D82C00D6A8AC /* APIParameterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45177ED41BF1D82C00D6A8AC /* APIParameterTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		45177EB91BF1CB7C00D6A8AC /* APITool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APITool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45177EBC1BF1CB7C00D6A8AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45177EBE1BF1CB7C00D6A8AC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		45177EC11BF1CB7C00D6A8AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45177EC31BF1CB7C00D6A8AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		45177EC61BF1CB7C00D6A8AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45177EC81BF1CB7C00D6A8AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45177ED01BF1D59200D6A8AC /* APIMethodTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMethodTableViewCell.swift; sourceTree = "<group>"; };
+		45177ED21BF1D74500D6A8AC /* APIURLTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIURLTableViewCell.swift; sourceTree = "<group>"; };
+		45177ED41BF1D82C00D6A8AC /* APIParameterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIParameterTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +60,9 @@
 			children = (
 				45177EBC1BF1CB7C00D6A8AC /* AppDelegate.swift */,
 				45177EBE1BF1CB7C00D6A8AC /* ViewController.swift */,
-				45177EC01BF1CB7C00D6A8AC /* Main.storyboard */,
+				45177ED01BF1D59200D6A8AC /* APIMethodTableViewCell.swift */,
+				45177ED21BF1D74500D6A8AC /* APIURLTableViewCell.swift */,
+				45177ED41BF1D82C00D6A8AC /* APIParameterTableViewCell.swift */,
 				45177EC31BF1CB7C00D6A8AC /* Assets.xcassets */,
 				45177EC51BF1CB7C00D6A8AC /* LaunchScreen.storyboard */,
 				45177EC81BF1CB7C00D6A8AC /* Info.plist */,
@@ -124,7 +130,6 @@
 			files = (
 				45177EC71BF1CB7C00D6A8AC /* LaunchScreen.storyboard in Resources */,
 				45177EC41BF1CB7C00D6A8AC /* Assets.xcassets in Resources */,
-				45177EC21BF1CB7C00D6A8AC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,22 +140,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45177ED51BF1D82C00D6A8AC /* APIParameterTableViewCell.swift in Sources */,
+				45177ED31BF1D74500D6A8AC /* APIURLTableViewCell.swift in Sources */,
 				45177EBF1BF1CB7C00D6A8AC /* ViewController.swift in Sources */,
 				45177EBD1BF1CB7C00D6A8AC /* AppDelegate.swift in Sources */,
+				45177ED11BF1D59200D6A8AC /* APIMethodTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		45177EC01BF1CB7C00D6A8AC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				45177EC11BF1CB7C00D6A8AC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		45177EC51BF1CB7C00D6A8AC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -250,6 +250,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = APITool/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = boris.APITool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -261,6 +262,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = APITool/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = boris.APITool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
