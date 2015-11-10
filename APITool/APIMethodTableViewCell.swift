@@ -29,6 +29,7 @@ class APIMethodTableViewCell: UITableViewCell
         self.methodLabel = UILabel()
         self.methodLabel?.frame = CGRectMake(10, 10, UIScreen.mainScreen().bounds.size.width/2, 30)
         self.methodLabel?.textColor = UIColor.lightTextColor()
+        self.methodLabel?.text = "GET"
         self.methodLabel?.backgroundColor = UIColor.greenColor()
         self.contentView.addSubview(self.methodLabel!)
     }

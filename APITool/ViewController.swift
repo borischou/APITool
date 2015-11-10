@@ -40,42 +40,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        var cell: UITableViewCell?
+        tableView.registerClass(APIParameterTableViewCell.self, forCellReuseIdentifier: "paramcell")
+        let cell = tableView.dequeueReusableCellWithIdentifier("paramcell", forIndexPath: indexPath)
         
-        if indexPath.section == 0
-        {
-            tableView.registerClass(APIMethodTableViewCell.self, forCellReuseIdentifier: "methodcell")
-            cell = tableView.dequeueReusableCellWithIdentifier("methodcell", forIndexPath: indexPath)
-            
-        }
-        else if indexPath.section == 1
-        {
-            tableView.registerClass(APIURLTableViewCell.self, forCellReuseIdentifier: "urlcell")
-            cell = tableView.dequeueReusableCellWithIdentifier("urlcell", forIndexPath: indexPath)
-        }
-        else
-        {
-            tableView.registerClass(APIParameterTableViewCell.self, forCellReuseIdentifier: "paramcell")
-            cell = tableView.dequeueReusableCellWithIdentifier("paramcell", forIndexPath: indexPath)
-        }
-        return cell!
+        return cell
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
-        return 3
+        return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        if section != 2
-        {
-            return 1
-        }
-        else
-        {
-            return 3
-        }
+        return 3
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
@@ -85,7 +63,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func sendButtonPressed()
     {
-        NSLog("sendButtonPressed")
+        
     }
     
     
