@@ -40,33 +40,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
+        var cell: UITableViewCell?
+        
         if indexPath.section == 0
         {
             tableView.registerClass(APIMethodTableViewCell.self, forCellReuseIdentifier: "methodcell")
-            let cell = tableView.dequeueReusableCellWithIdentifier("methodcell", forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCellWithIdentifier("methodcell", forIndexPath: indexPath)
             
-            
-            return cell
         }
         else if indexPath.section == 1
         {
             tableView.registerClass(APIURLTableViewCell.self, forCellReuseIdentifier: "urlcell")
-            let cell = tableView.dequeueReusableCellWithIdentifier("urlcell", forIndexPath: indexPath)
-            
-            return cell
+            cell = tableView.dequeueReusableCellWithIdentifier("urlcell", forIndexPath: indexPath)
         }
         else
         {
             tableView.registerClass(APIParameterTableViewCell.self, forCellReuseIdentifier: "paramcell")
-            let cell = tableView.dequeueReusableCellWithIdentifier("paramcell", forIndexPath: indexPath)
-            
-            return cell
+            cell = tableView.dequeueReusableCellWithIdentifier("paramcell", forIndexPath: indexPath)
         }
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
-    {
-        
+        return cell!
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int

@@ -9,41 +9,56 @@
 import Foundation
 import UIKit
 
+protocol APIParameterTableViewCellDelegate
+{
+    func parameterTableViewCell(cell: APIParameterTableViewCell, didPressDeleteButton deleteButton: UIButton)
+}
+
 class APIParameterTableViewCell: UITableViewCell
 {
     var keyTextField: UITextField?
     var valueTextField: UITextField?
-    var addButton: UIButton?
+    var deleteButton: UIButton?
+    var delegate: APIParameterTableViewCellDelegate?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?)
     {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .None
         self.initSubviews()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder)
+    {
         fatalError("init(coder:) has not been implemented")
     }
     
     func initSubviews()
     {
-        let itemWidth: CGFloat = (UIScreen.mainScreen().bounds.size.width - 30)/2
+        let itemWidth: CGFloat = (UIScreen.mainScreen().bounds.size.width - 30 - 50)/2
+        let itemHeight: CGFloat = 50.0
 
         self.keyTextField = UITextField()
-        self.keyTextField?.frame = CGRectMake(10, 10, itemWidth, 30)
+        self.keyTextField?.frame = CGRectMake(10, 0, itemWidth, itemHeight)
         self.keyTextField?.placeholder = "key"
-        self.keyTextField?.layer.borderWidth = 1.0
-        self.keyTextField?.layer.borderColor = UIColor.greenColor().CGColor
         self.contentView.addSubview(self.keyTextField!)
         
         self.valueTextField = UITextField()
-        self.valueTextField?.frame = CGRectMake(10 + itemWidth + 10, 10, itemWidth, 30)
+        self.valueTextField?.frame = CGRectMake(20 + itemWidth, 0, itemWidth, itemHeight)
         self.valueTextField?.placeholder = "value"
-        self.valueTextField?.layer.borderWidth = 1.0
-        self.valueTextField?.layer.borderColor = UIColor.greenColor().CGColor
         self.contentView.addSubview(self.valueTextField!)
         
-        self.addButton = UIButton()
-        //self.addButton?.frame = CGRectMake(<#T##x: CGFloat##CGFloat#>, <#T##y: CGFloat##CGFloat#>, <#T##width: CGFloat##CGFloat#>, <#T##height: CGFloat##CGFloat#>)
+        self.deleteButton = UIButton()
+        self.deleteButton?.frame = CGRectMake(30 + itemWidth * 2, 0, itemHeight, itemHeight)
+        self.deleteButton?.setTitle("DEL", forState: UIControlState.Normal)
+        self.deleteButton?.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        self.deleteButton?.backgroundColor = UIColor.greenColor()
+        self.deleteButton?.addTarget(self, action: "deleteButtonPressed", forControlEvents: UIControlEvents.TouchDragInside)
+        self.contentView.addSubview(self.deleteButton!)
+    }
+    
+    func deleteButtonPressed()
+    {
+        self.delegate?.parameterTableViewCell(self, didPressDeleteButton: self.deleteButton!)
     }
 }
