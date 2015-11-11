@@ -49,6 +49,9 @@ class APIMethodURLTableHeaderView: UIView
         self.urlTextField = UITextField()
         self.urlTextField?.frame = CGRectMake(10, 30 + itemHeight, itemWidth, itemHeight)
         self.urlTextField?.backgroundColor = UIColor.whiteColor()
+        self.urlTextField?.font = UIFont.systemFontOfSize(13.0)
+        self.urlTextField?.clearButtonMode = UITextFieldViewMode.Always
+        self.urlTextField?.autocapitalizationType = UITextAutocapitalizationType.None
         self.urlTextField?.placeholder = "Enter URL here"
         self.addSubview(self.urlTextField!)
     }

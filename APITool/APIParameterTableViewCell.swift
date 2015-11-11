@@ -9,17 +9,11 @@
 import Foundation
 import UIKit
 
-protocol APIParameterTableViewCellDelegate
-{
-    func parameterTableViewCell(cell: APIParameterTableViewCell, didPressDeleteButton deleteButton: UIButton)
-}
-
 class APIParameterTableViewCell: UITableViewCell
 {
     var keyTextField: UITextField?
     var valueTextField: UITextField?
     var deleteButton: UIButton?
-    var delegate: APIParameterTableViewCellDelegate?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?)
     {
@@ -35,30 +29,38 @@ class APIParameterTableViewCell: UITableViewCell
     
     func initSubviews()
     {
-        let itemWidth: CGFloat = (UIScreen.mainScreen().bounds.size.width - 30 - 50)/2
-        let itemHeight: CGFloat = 50.0
+        let itemWidth: CGFloat = (UIScreen.mainScreen().bounds.size.width - 80)/2
+        let itemHeight: CGFloat = 40.0
 
         self.keyTextField = UITextField()
-        self.keyTextField?.frame = CGRectMake(10, 0, itemWidth, itemHeight)
+        self.keyTextField?.frame = CGRectMake(10, 5, itemWidth, itemHeight)
         self.keyTextField?.placeholder = "key"
+        self.keyTextField?.font = UIFont.systemFontOfSize(13.0)
+        self.keyTextField?.clearButtonMode = UITextFieldViewMode.Always
+        self.keyTextField?.autocapitalizationType = UITextAutocapitalizationType.None
         self.contentView.addSubview(self.keyTextField!)
         
         self.valueTextField = UITextField()
-        self.valueTextField?.frame = CGRectMake(20 + itemWidth, 0, itemWidth, itemHeight)
+        self.valueTextField?.frame = CGRectMake(20 + itemWidth, 5, itemWidth, itemHeight)
         self.valueTextField?.placeholder = "value"
+        self.valueTextField?.font = UIFont.systemFontOfSize(13.0)
+        self.valueTextField?.clearButtonMode = UITextFieldViewMode.Always
+        self.valueTextField?.autocapitalizationType = UITextAutocapitalizationType.None
         self.contentView.addSubview(self.valueTextField!)
         
         self.deleteButton = UIButton()
-        self.deleteButton?.frame = CGRectMake(30 + itemWidth * 2, 0, itemHeight, itemHeight)
+        self.deleteButton?.frame = CGRectMake(30 + itemWidth * 2, 5, itemHeight, itemHeight)
         self.deleteButton?.setTitle("DEL", forState: UIControlState.Normal)
+        self.deleteButton?.titleLabel?.font = UIFont.systemFontOfSize(13.0)
         self.deleteButton?.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         self.deleteButton?.backgroundColor = UIColor.greenColor()
-        self.deleteButton?.addTarget(self, action: "deleteButtonPressed", forControlEvents: UIControlEvents.TouchDragInside)
+        self.deleteButton?.addTarget(self, action: "deleteButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         self.contentView.addSubview(self.deleteButton!)
     }
     
-    func deleteButtonPressed()
+    func deleteButtonPressed(sender: UIButton)
     {
-        self.delegate?.parameterTableViewCell(self, didPressDeleteButton: self.deleteButton!)
+        self.keyTextField?.text = ""
+        self.valueTextField?.text = ""
     }
 }

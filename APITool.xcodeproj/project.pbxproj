@@ -13,6 +13,7 @@
 		45177EC71BF1CB7C00D6A8AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45177EC51BF1CB7C00D6A8AC /* LaunchScreen.storyboard */; };
 		45177ED51BF1D82C00D6A8AC /* APIParameterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45177ED41BF1D82C00D6A8AC /* APIParameterTableViewCell.swift */; };
 		45EFFBD21BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EFFBD11BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift */; };
+		45EFFBD41BF30604003C5579 /* APIResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EFFBD31BF30604003C5579 /* APIResultViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		45177EC81BF1CB7C00D6A8AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45177ED41BF1D82C00D6A8AC /* APIParameterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIParameterTableViewCell.swift; sourceTree = "<group>"; };
 		45EFFBD11BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMethodURLTableHeaderView.swift; sourceTree = "<group>"; };
+		45EFFBD31BF30604003C5579 /* APIResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResultViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				45177EBC1BF1CB7C00D6A8AC /* AppDelegate.swift */,
 				45177EBE1BF1CB7C00D6A8AC /* ViewController.swift */,
+				45EFFBD31BF30604003C5579 /* APIResultViewController.swift */,
 				45EFFBD11BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift */,
 				45177ED41BF1D82C00D6A8AC /* APIParameterTableViewCell.swift */,
 				45177EC31BF1CB7C00D6A8AC /* Assets.xcassets */,
@@ -141,6 +144,7 @@
 				45177EBF1BF1CB7C00D6A8AC /* ViewController.swift in Sources */,
 				45177EBD1BF1CB7C00D6A8AC /* AppDelegate.swift in Sources */,
 				45EFFBD21BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift in Sources */,
+				45EFFBD41BF30604003C5579 /* APIResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
