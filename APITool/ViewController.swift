@@ -163,8 +163,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             //do something
             NSLog("data: \(data)\nresponse: \(response)\nerror: \(responseError)")
             let resultvc = APIResultViewController()
-            let dataString = NSString.init(data: data!, encoding: NSUTF8StringEncoding)
-            resultvc.result = NSString.init(format: "DATA: \(dataString!)\n\nRESPONSE: \((response?.description)!)")
+            if responseError == nil
+            {
+                let dataString = NSString.init(data: data!, encoding: NSUTF8StringEncoding)
+                resultvc.result = NSString.init(format: "DATA: \(dataString!)\n\nRESPONSE: \((response?.description)!)")
+            }
+            else
+            {
+                resultvc.result = responseError?.description
+            }
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.navigationController?.pushViewController(resultvc, animated: true)
             })
