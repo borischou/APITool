@@ -225,9 +225,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             urlstr?.stringByReplacingOccurrencesOfString("?", withString: "")
         }
         
-        NSLog("url: \(urlstr!)")
-        
-        return (urlstr?.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: " ")))!
+        return (urlstr?.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: " ")).stringByReplacingOccurrencesOfString(" ", withString: ""))!
     }
     
     func assembleNSURLRequest(url: String) -> NSURLRequest
