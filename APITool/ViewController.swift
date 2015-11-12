@@ -9,6 +9,8 @@
 import UIKit
 import Foundation
 
+let filename = "records.plist"
+
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, APIMethodURLTableHeaderViewDelegate
 {
     var tableView: UITableView?
@@ -16,6 +18,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var headerView: APIMethodURLTableHeaderView?
     var rowNumber: NSInteger?
     var historyBarbutton: UIBarButtonItem?
+    var params: NSMutableDictionary?
     
     let sendButtonHeight: CGFloat = 60.0
     let headerViewHeight: CGFloat = 200.0
@@ -183,9 +186,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let urlstr = self.assembleURL()
         let request = self.assembleNSURLRequest(urlstr as String)
+        let urltext = self.validateURL((self.headerView?.urlTextField?.text)!)
+        let methodtext = self.headerView?.methodLabel?.text
+        let recordDict = self.assembleNSDictionary(urltext, params: self.params, method: methodtext!)
+        self.saveRecordToPlist(recordDict)
         
-        let session = NSURLSession.sharedSession()
-        session.dataTaskWithRequest(request) { (data, response, responseError) -> Void in
+        NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, responseError) -> Void in
             //do something
             NSLog("data: \(data)\nresponse: \(response)\nerror: \(responseError)")
             let resultvc = APIResultViewController()
@@ -220,8 +226,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 params.setValue((cell.valueTextField?.text?.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: " ")))!,
                     forKey: (cell.keyTextField?.text?.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: " ")))!)
             }
+            self.params = params
         }
-        NSLog("params: \(params)\nmethod: \(self.headerView?.methodLabel?.text)")
+        NSLog("params: \(self.params)\nmethod: \(self.headerView?.methodLabel?.text)")
         
         var urlstr: NSString?
         
@@ -248,10 +255,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if urlstr?.hasSuffix("?") == true
         {
-            urlstr?.stringByReplacingOccurrencesOfString("?", withString: "")
+            urlstr = urlstr?.stringByReplacingOccurrencesOfString("?", withString: "")
         }
         
-        return (urlstr?.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: " ")).stringByReplacingOccurrencesOfString(" ", withString: ""))!
+        let finalUrl = self.validateURL(urlstr as! String)
+        
+        NSLog("final url: \(finalUrl)")
+        
+        return finalUrl
+    }
+    
+    func validateURL(url: String) -> String
+    {
+        return url.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: " ")).stringByReplacingOccurrencesOfString(" ", withString: "")
     }
     
     func assembleNSURLRequest(url: String) -> NSURLRequest
@@ -264,12 +280,46 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return request as NSURLRequest
     }
     
-    func assembleNSDictionary(url: String, params: NSDictionary) -> NSDictionary
+    func assembleNSDictionary(url: String, params: NSDictionary?, method: String) -> NSDictionary
     {
         let record: NSMutableDictionary = NSMutableDictionary()
         record.setValue(url, forKey: "url")
         record.setValue(params, forKey: "params")
+        record.setValue(method, forKey: "method")
         return record
+    }
+    
+    func saveRecordToPlist(record: NSDictionary)
+    {
+        var mutableRecords: NSMutableArray?
+        if APIUtils.readRecordsFromPlist(APIUtils.plistPathForFilename(filename)) != nil
+        {
+            let records: NSArray = (APIUtils.readRecordsFromPlist(APIUtils.plistPathForFilename(filename)))!
+            mutableRecords = NSMutableArray(array: records)
+            mutableRecords!.addObject(record)
+        }
+        else
+        {
+            mutableRecords = NSMutableArray(object: record)
+        }
+        self.saveRecordsToPlist(mutableRecords! as NSArray)
+    }
+    
+    func saveRecordsToPlist(records: NSArray)
+    {
+        let recordsDict: NSDictionary = ["records": records]
+        let manager = NSFileManager.defaultManager()
+        let plistPath = APIUtils.plistPathForFilename(filename)
+        if manager.fileExistsAtPath(plistPath) == false
+        {
+            let isCreated = manager.createFileAtPath(plistPath, contents: nil, attributes: nil)
+            NSLog("创建结果: \(isCreated)")
+        }
+        else
+        {
+            let isWritten = recordsDict.writeToFile(plistPath, atomically: true)
+            NSLog("写入结果: \(isWritten)")
+        }
     }
 }
 
