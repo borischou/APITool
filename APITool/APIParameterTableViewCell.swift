@@ -63,4 +63,10 @@ class APIParameterTableViewCell: UITableViewCell
         self.keyTextField?.text = ""
         self.valueTextField?.text = ""
     }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
+    {
+        self.keyTextField?.resignFirstResponder()
+        self.valueTextField?.resignFirstResponder()
+    }
 }

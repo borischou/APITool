@@ -61,4 +61,9 @@ class APIMethodURLTableHeaderView: UIView
         NSLog("methodLabelTapped")
         self.delegate?.APIMethodURL(self, didTapMethod: self.methodLabel!)
     }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
+    {
+        self.urlTextField?.resignFirstResponder()
+    }
 }
