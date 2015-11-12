@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var sendButton: UIButton?
     var headerView: APIMethodURLTableHeaderView?
     var rowNumber: NSInteger?
+    var historyBarbutton: UIBarButtonItem?
     
     let sendButtonHeight: CGFloat = 60.0
     let headerViewHeight: CGFloat = 200.0
@@ -27,12 +28,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         self.rowNumber = 3
         
+        //历史记录
+        let historyButton = UIButton(type: UIButtonType.Custom)
+        historyButton.frame = CGRectMake(0, 0, 23, 23)
+        historyButton.setImage(UIImage(named: "group_tab_icon") , forState: UIControlState.Normal)
+        historyButton.addTarget(self, action: "historyButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        self.historyBarbutton = UIBarButtonItem(customView: historyButton)
+        self.navigationItem.leftBarButtonItem = self.historyBarbutton
+        
+        //顶端视图
         let headerRect = CGRectMake(0, (self.navigationController?.navigationBar.frame.size.height)! + UIApplication.sharedApplication().statusBarFrame.height, self.view.frame.size.width, headerViewHeight)
         self.headerView = APIMethodURLTableHeaderView(frame: headerRect)
         self.headerView?.delegate = self
         self.headerView?.urlTextField?.delegate = self
         self.view.addSubview(self.headerView!)
         
+        //字典表格
         let tvTop: CGFloat = (self.navigationController?.navigationBar.frame.size.height)! + UIApplication.sharedApplication().statusBarFrame.height + headerViewHeight
         let tvRect = CGRectMake(0, tvTop, self.view.frame.size.width, self.view.frame.size.height - sendButtonHeight - tvTop)
         self.tableView = UITableView(frame: tvRect, style: UITableViewStyle.Grouped)
@@ -42,6 +53,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableView?.dataSource = self
         self.view.addSubview(self.tableView!)
         
+        //发送按钮
         let sendButtonRect = CGRectMake(0, self.view.frame.size.height - sendButtonHeight, self.view.frame.size.width, sendButtonHeight)
         self.sendButton = UIButton(frame: sendButtonRect)
         self.sendButton?.backgroundColor = UIColor.greenColor()
@@ -49,6 +61,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.sendButton?.setTitleColor(UIColor.grayColor(), forState: UIControlState.Disabled)
         self.sendButton?.setTitle("SEND", forState: UIControlState.Normal)
         self.sendButton?.enabled = false
+        self.sendButton?.layer.shadowColor = UIColor.blackColor().CGColor
+        self.sendButton?.layer.shadowOpacity = 0.3
+        self.sendButton?.layer.shadowOffset = CGSizeMake(0, -3)
         self.sendButton?.addTarget(self, action: "sendButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(self.sendButton!)
     }
@@ -122,6 +137,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     // MARK: Helpers
+    
+    func historyButtonPressed()
+    {
+        //调出历史记录页面
+        NSLog("history")
+        let historyvc = APIHistoryViewController()
+        let navc = UINavigationController(rootViewController: historyvc)
+        self.navigationController?.presentViewController(navc, animated: true, completion: { () -> Void in
+            //do something
+        })
+    }
     
     func detecteTextField(textField: UITextField)
     {
@@ -236,6 +262,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         request.timeoutInterval = 60
         request.allHTTPHeaderFields = nil
         return request as NSURLRequest
+    }
+    
+    func assembleNSDictionary(url: String, params: NSDictionary) -> NSDictionary
+    {
+        let record: NSMutableDictionary = NSMutableDictionary()
+        record.setValue(url, forKey: "url")
+        record.setValue(params, forKey: "params")
+        return record
     }
 }
 

@@ -12,6 +12,9 @@
 		45177EC41BF1CB7C00D6A8AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45177EC31BF1CB7C00D6A8AC /* Assets.xcassets */; };
 		45177EC71BF1CB7C00D6A8AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45177EC51BF1CB7C00D6A8AC /* LaunchScreen.storyboard */; };
 		45177ED51BF1D82C00D6A8AC /* APIParameterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45177ED41BF1D82C00D6A8AC /* APIParameterTableViewCell.swift */; };
+		45D8F22B1BF433A70011F906 /* group_tab_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D8F22A1BF433A70011F906 /* group_tab_icon@3x.png */; };
+		45D8F22D1BF4354F0011F906 /* APIHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8F22C1BF4354F0011F906 /* APIHistoryViewController.swift */; };
+		45D8F22F1BF4371D0011F906 /* APIHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8F22E1BF4371D0011F906 /* APIHistoryTableViewCell.swift */; };
 		45EFFBD21BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EFFBD11BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift */; };
 		45EFFBD41BF30604003C5579 /* APIResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EFFBD31BF30604003C5579 /* APIResultViewController.swift */; };
 /* End PBXBuildFile section */
@@ -24,6 +27,9 @@
 		45177EC61BF1CB7C00D6A8AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45177EC81BF1CB7C00D6A8AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45177ED41BF1D82C00D6A8AC /* APIParameterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIParameterTableViewCell.swift; sourceTree = "<group>"; };
+		45D8F22A1BF433A70011F906 /* group_tab_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "group_tab_icon@3x.png"; sourceTree = "<group>"; };
+		45D8F22C1BF4354F0011F906 /* APIHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHistoryViewController.swift; sourceTree = "<group>"; };
+		45D8F22E1BF4371D0011F906 /* APIHistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		45EFFBD11BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMethodURLTableHeaderView.swift; sourceTree = "<group>"; };
 		45EFFBD31BF30604003C5579 /* APIResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResultViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -60,9 +66,12 @@
 			children = (
 				45177EBC1BF1CB7C00D6A8AC /* AppDelegate.swift */,
 				45177EBE1BF1CB7C00D6A8AC /* ViewController.swift */,
+				45D8F22C1BF4354F0011F906 /* APIHistoryViewController.swift */,
+				45D8F22E1BF4371D0011F906 /* APIHistoryTableViewCell.swift */,
 				45EFFBD31BF30604003C5579 /* APIResultViewController.swift */,
 				45EFFBD11BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift */,
 				45177ED41BF1D82C00D6A8AC /* APIParameterTableViewCell.swift */,
+				45D8F22A1BF433A70011F906 /* group_tab_icon@3x.png */,
 				45177EC31BF1CB7C00D6A8AC /* Assets.xcassets */,
 				45177EC51BF1CB7C00D6A8AC /* LaunchScreen.storyboard */,
 				45177EC81BF1CB7C00D6A8AC /* Info.plist */,
@@ -129,6 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45177EC71BF1CB7C00D6A8AC /* LaunchScreen.storyboard in Resources */,
+				45D8F22B1BF433A70011F906 /* group_tab_icon@3x.png in Resources */,
 				45177EC41BF1CB7C00D6A8AC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,10 +150,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45D8F22D1BF4354F0011F906 /* APIHistoryViewController.swift in Sources */,
 				45177ED51BF1D82C00D6A8AC /* APIParameterTableViewCell.swift in Sources */,
 				45177EBF1BF1CB7C00D6A8AC /* ViewController.swift in Sources */,
 				45177EBD1BF1CB7C00D6A8AC /* AppDelegate.swift in Sources */,
 				45EFFBD21BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift in Sources */,
+				45D8F22F1BF4371D0011F906 /* APIHistoryTableViewCell.swift in Sources */,
 				45EFFBD41BF30604003C5579 /* APIResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
