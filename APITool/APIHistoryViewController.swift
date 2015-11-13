@@ -14,6 +14,8 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
     var tableView: UITableView?
     var records: NSArray?
     
+    let reuseId = "historycell"
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -25,14 +27,14 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
         self.tableView?.backgroundColor = UIColor.whiteColor()
         self.tableView?.delegate = self
         self.tableView?.dataSource = self
+        self.tableView!.registerClass(UITableViewCell.self, forCellReuseIdentifier: reuseId)
         self.view.addSubview(self.tableView!)
         
-        let weakSelf = APIHistoryViewController()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
             //取出历史记录
-            weakSelf.records = APIUtils.readRecordsFromPlist(APIUtils.plistPathForFilename(filename))
+            self.records = APIUtils.readRecordsFromPlist(APIUtils.plistPathForFilename(filename))
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                weakSelf.tableView?.reloadData()
+                self.tableView?.reloadData()
             })
         }
         
@@ -68,9 +70,15 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        tableView.registerClass(APIHistoryTableViewCell.self, forCellReuseIdentifier: "historycell")
-        let cell: APIHistoryTableViewCell = tableView.dequeueReusableCellWithIdentifier("historycell", forIndexPath: indexPath) as! APIHistoryTableViewCell
-        
+        //let cell = tableView.dequeueReusableCellWithIdentifier("historycell", forIndexPath: indexPath)
+        let cell = UITableViewCell.init(style: UITableViewCellStyle.Subtitle, reuseIdentifier: reuseId)
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        if self.records != nil && self.records?.count > 0
+        {
+            let record: NSDictionary = self.records![indexPath.row] as! NSDictionary
+            cell.textLabel?.text = record["url"] as? String
+            cell.detailTextLabel?.text = record["method"] as? String
+        }
         return cell
     }
     
@@ -78,12 +86,6 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
     {
         
     }
-    
-    
-    
-    
-    
-    
     
     
 }
