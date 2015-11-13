@@ -11,6 +11,6 @@ import UIKit
 
 class APIHistoryTableViewCell: UITableViewCell
 {
-    var urlLabel: UILabel?
+    var record: NSDictionary?
     
 }
