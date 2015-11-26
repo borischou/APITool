@@ -9,6 +9,8 @@
 import UIKit
 import Foundation
 
+import ReactiveCocoa
+
 let filename = "records.plist"
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, APIMethodURLTableHeaderViewDelegate
@@ -69,6 +71,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.sendButton?.layer.shadowOffset = CGSizeMake(0, -3)
         self.sendButton?.addTarget(self, action: "sendButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(self.sendButton!)
+        
+        //Reactive Cocoa
+        
+//        let validUrlSignal: RACSignal = (self.headerView?.urlTextField?.rac_textSignal().map({ (text) -> AnyObject! in
+//            return NSNumber(bool: self.isValidUrl(text as! String))
+//        }))!
+//        
+//        RAC(self.headerView?.urlTextField, backgroundColor) = validUrlSignal.map({ (urlValid) -> AnyObject! in
+//            return urlValid.boolValue ? UIColor.greenColor() : UIColor.redColor()
+//        })
+    }
+    
+    //MARK: Custom
+    
+    func isValidUrl(url: String) -> Bool
+    {
+        return url.characters.count >= 4
     }
     
     //MARK: UITableView delegate & data source
