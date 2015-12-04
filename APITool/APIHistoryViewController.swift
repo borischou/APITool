@@ -62,7 +62,11 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // MARK: Helpers
     
-    
+    func cleanCell(cell: UITableViewCell)
+    {
+        cell.textLabel?.text = ""
+        cell.detailTextLabel?.text = ""
+    }
     
     // MARK: UITableViewDelegate & UITableViewDataSource
     
@@ -82,6 +86,7 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
     {
         let cell = UITableViewCell.init(style: UITableViewCellStyle.Subtitle, reuseIdentifier: reuseId)
         cell.selectionStyle = UITableViewCellSelectionStyle.None
+        self.cleanCell(cell)
         if self.records != nil && self.records?.count > 0
         {
             let record: NSDictionary = self.records![indexPath.row] as! NSDictionary
