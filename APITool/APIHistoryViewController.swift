@@ -74,13 +74,12 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         else
         {
-            return 10
+            return 0
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        //let cell = tableView.dequeueReusableCellWithIdentifier("historycell", forIndexPath: indexPath)
         let cell = UITableViewCell.init(style: UITableViewCellStyle.Subtitle, reuseIdentifier: reuseId)
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         if self.records != nil && self.records?.count > 0
@@ -110,12 +109,15 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
     {
         if editingStyle == UITableViewCellEditingStyle.Delete
         {
-            let record = self.records?.objectAtIndex(indexPath.row)
-            self.records?.removeObject(record!)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), { () -> Void in
-                APIUtils.deleteRecordAtIndex(indexPath.row)
-            })
+            if APIUtils.deleteRecordAtIndex(indexPath.row)
+            {
+                self.records?.removeObjectAtIndex(indexPath.row)
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            }
+            else
+            {
+                NSLog("删除失败")
+            }
         }
     }
     

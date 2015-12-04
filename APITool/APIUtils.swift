@@ -48,18 +48,18 @@ class APIUtils: NSObject
     
     static func saveRecordToPlist(record: NSDictionary)
     {
-        var mutableRecords: NSMutableArray?
+        var mutableRecords: NSMutableArray
         if self.readRecordsFromPlist(self.plistPathForFilename(filename)) != nil
         {
             let records: NSArray = (self.readRecordsFromPlist(self.plistPathForFilename(filename)))!
-            mutableRecords = NSMutableArray(array: records)
-            mutableRecords!.addObject(record)
+            mutableRecords = records.mutableCopy() as! NSMutableArray
+            mutableRecords.addObject(record)
         }
         else
         {
             mutableRecords = NSMutableArray(object: record)
         }
-        self.saveRecordsToPlist(mutableRecords! as NSArray)
+        self.saveRecordsToPlist(mutableRecords as NSArray)
     }
     
     static func saveRecordsToPlist(records: NSArray)
@@ -70,7 +70,11 @@ class APIUtils: NSObject
         if manager.fileExistsAtPath(plistPath) == false
         {
             let isCreated = manager.createFileAtPath(plistPath, contents: nil, attributes: nil)
-            NSLog("创建结果: \(isCreated)")
+            if isCreated
+            {
+                let isWritten = recordsDict.writeToFile(plistPath, atomically: true)
+                NSLog("创建结果: \(isCreated) 写入结果: \(isWritten)")
+            }
         }
         else
         {

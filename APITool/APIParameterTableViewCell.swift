@@ -38,6 +38,7 @@ class APIParameterTableViewCell: UITableViewCell
         self.keyTextField?.font = UIFont.systemFontOfSize(13.0)
         self.keyTextField?.clearButtonMode = UITextFieldViewMode.Always
         self.keyTextField?.autocapitalizationType = UITextAutocapitalizationType.None
+        self.keyTextField?.keyboardType = UIKeyboardType.ASCIICapable
         self.contentView.addSubview(self.keyTextField!)
         
         self.valueTextField = UITextField()
@@ -46,6 +47,7 @@ class APIParameterTableViewCell: UITableViewCell
         self.valueTextField?.font = UIFont.systemFontOfSize(13.0)
         self.valueTextField?.clearButtonMode = UITextFieldViewMode.Always
         self.valueTextField?.autocapitalizationType = UITextAutocapitalizationType.None
+        self.valueTextField?.keyboardType = UIKeyboardType.ASCIICapable
         self.contentView.addSubview(self.valueTextField!)
         
         self.deleteButton = UIButton()

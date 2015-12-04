@@ -69,7 +69,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.sendButton?.layer.shadowColor = UIColor.blackColor().CGColor
         self.sendButton?.layer.shadowOpacity = 0.3
         self.sendButton?.layer.shadowOffset = CGSizeMake(0, -3)
-        self.sendButton?.addTarget(self, action: "sendButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        self.sendButton?.addTarget(self, action: "sendButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(self.sendButton!)
         
         //Reactive Cocoa
@@ -215,6 +215,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func historyViewController(tableView: UITableView, didSelectRecord record: NSDictionary, atIndexPath indexPath: NSIndexPath)
     {
         self.autoSetRecord(record)
+        self.headerView?.urlTextField?.rac_textSignal().subscribeNext({ (next) -> Void in
+            if let text: String? = next as? String
+            {
+                self.headerView?.urlTextField?.layer.borderColor = self.isValidUrl(text!) ? UIColor.greenColor().CGColor : UIColor.redColor().CGColor
+            }
+        })
     }
     
     // MARK: Helpers
@@ -262,19 +268,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    func sendButtonPressed()
+    func sendButtonPressed(sender: UIButton)
     {
         if self.headerView?.urlTextField?.text?.characters.count < 1
         {
             return
         }
+        sender.enabled = false
         
         let urlstr = self.assembleURL()
         let request = self.assembleNSURLRequest(urlstr as String)
         let urltext = self.validateURL((self.headerView?.urlTextField?.text)!)
         let methodtext = self.headerView?.methodLabel?.text
         let recordDict = self.assembleNSDictionary(urltext, params: self.params, method: methodtext!)
-        APIUtils.saveRecordToPlist(recordDict)
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) { () -> Void in
+            APIUtils.saveRecordToPlist(recordDict)
+        }
         
         NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, responseError) -> Void in
             //do something
@@ -291,6 +301,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.navigationController?.pushViewController(resultvc, animated: true)
+                sender.enabled = true
             })
         }.resume()
     }

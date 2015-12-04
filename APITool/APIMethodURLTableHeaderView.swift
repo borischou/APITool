@@ -53,6 +53,7 @@ class APIMethodURLTableHeaderView: UIView
         self.urlTextField?.clearButtonMode = UITextFieldViewMode.Always
         self.urlTextField?.autocapitalizationType = UITextAutocapitalizationType.None
         self.urlTextField?.placeholder = "Enter URL here"
+        self.urlTextField?.keyboardType = UIKeyboardType.ASCIICapable
         self.addSubview(self.urlTextField!)
     }
     
