@@ -202,12 +202,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func textFieldDidBeginEditing(textField: UITextField)
     {
-        self.detecteTextField(textField)
+        self.detectTextField(textField)
     }
     
     func textFieldDidEndEditing(textField: UITextField)
     {
-        self.detecteTextField(textField)
+        self.detectTextField(textField)
     }
     
     // MARK: APIHistoryViewControllerDelegate
@@ -243,7 +243,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         })
     }
     
-    func detecteTextField(textField: UITextField)
+    func detectTextField(textField: UITextField)
     {
         textField.layer.borderWidth = 0.5
         
@@ -274,7 +274,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             return
         }
-        sender.enabled = false
+        self.sendingStateForSendButton(sender)
         
         let urlstr = self.assembleURL()
         let request = self.assembleNSURLRequest(urlstr as String)
@@ -301,9 +301,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.navigationController?.pushViewController(resultvc, animated: true)
-                sender.enabled = true
+                self.recoverStateForSendButton(sender)
             })
         }.resume()
+    }
+    
+    func sendingStateForSendButton(sender: UIButton)
+    {
+        sender.enabled = false
+        sender.setTitle("SENDING", forState: UIControlState.Disabled)
+    }
+    
+    func recoverStateForSendButton(sender: UIButton)
+    {
+        sender.enabled = true
+        sender.setTitle("SEND", forState: UIControlState.Disabled)
     }
     
     func assembleURL() -> NSString
