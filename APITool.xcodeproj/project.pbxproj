@@ -71,6 +71,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		450261571C1122AD00C55A23 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				45D8F2321BF479220011F906 /* APIUtils.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		45177EB01BF1CB7C00D6A8AC = {
 			isa = PBXGroup;
 			children = (
@@ -93,8 +101,8 @@
 		45177EBB1BF1CB7C00D6A8AC /* APITool */ = {
 			isa = PBXGroup;
 			children = (
+				450261571C1122AD00C55A23 /* Utils */,
 				45177EBC1BF1CB7C00D6A8AC /* AppDelegate.swift */,
-				45D8F2321BF479220011F906 /* APIUtils.swift */,
 				45177EBE1BF1CB7C00D6A8AC /* ViewController.swift */,
 				45D8F22C1BF4354F0011F906 /* APIHistoryViewController.swift */,
 				45D8F22E1BF4371D0011F906 /* APIHistoryTableViewCell.swift */,

@@ -13,7 +13,7 @@ import ReactiveCocoa
 
 let filename = "records.plist"
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, APIMethodURLTableHeaderViewDelegate
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, APIMethodURLTableHeaderViewDelegate, APIHistoryViewControllerDelegate
 {
     var tableView: UITableView?
     var sendButton: UIButton?
@@ -158,13 +158,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.detecteTextField(textField)
     }
     
+    // MARK: APIHistoryViewControllerDelegate
+    
+    func historyViewController(tableView: UITableView, didSelectRecord record: NSDictionary, atIndexPath indexPath: NSIndexPath)
+    {
+        self.autoSetRecord(record)
+    }
+    
     // MARK: Helpers
+    
+    func autoSetRecord(record: NSDictionary)
+    {
+        self.headerView?.urlTextField?.text = record["url"] as? String
+        self.headerView?.methodLabel?.text = record["method"] as? String
+    }
     
     func historyButtonPressed()
     {
         //调出历史记录页面
         NSLog("history")
         let historyvc = APIHistoryViewController()
+        historyvc.delegate = self
         let navc = UINavigationController(rootViewController: historyvc)
         self.navigationController?.presentViewController(navc, animated: true, completion: { () -> Void in
             //do something
@@ -208,7 +222,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let urltext = self.validateURL((self.headerView?.urlTextField?.text)!)
         let methodtext = self.headerView?.methodLabel?.text
         let recordDict = self.assembleNSDictionary(urltext, params: self.params, method: methodtext!)
-        self.saveRecordToPlist(recordDict)
+        APIUtils.saveRecordToPlist(recordDict)
         
         NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, responseError) -> Void in
             //do something
@@ -308,37 +322,37 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return record
     }
     
-    func saveRecordToPlist(record: NSDictionary)
-    {
-        var mutableRecords: NSMutableArray?
-        if APIUtils.readRecordsFromPlist(APIUtils.plistPathForFilename(filename)) != nil
-        {
-            let records: NSArray = (APIUtils.readRecordsFromPlist(APIUtils.plistPathForFilename(filename)))!
-            mutableRecords = NSMutableArray(array: records)
-            mutableRecords!.addObject(record)
-        }
-        else
-        {
-            mutableRecords = NSMutableArray(object: record)
-        }
-        self.saveRecordsToPlist(mutableRecords! as NSArray)
-    }
-    
-    func saveRecordsToPlist(records: NSArray)
-    {
-        let recordsDict: NSDictionary = ["records": records]
-        let manager = NSFileManager.defaultManager()
-        let plistPath = APIUtils.plistPathForFilename(filename)
-        if manager.fileExistsAtPath(plistPath) == false
-        {
-            let isCreated = manager.createFileAtPath(plistPath, contents: nil, attributes: nil)
-            NSLog("创建结果: \(isCreated)")
-        }
-        else
-        {
-            let isWritten = recordsDict.writeToFile(plistPath, atomically: true)
-            NSLog("写入结果: \(isWritten)")
-        }
-    }
+//    func saveRecordToPlist(record: NSDictionary)
+//    {
+//        var mutableRecords: NSMutableArray?
+//        if APIUtils.readRecordsFromPlist(APIUtils.plistPathForFilename(filename)) != nil
+//        {
+//            let records: NSArray = (APIUtils.readRecordsFromPlist(APIUtils.plistPathForFilename(filename)))!
+//            mutableRecords = NSMutableArray(array: records)
+//            mutableRecords!.addObject(record)
+//        }
+//        else
+//        {
+//            mutableRecords = NSMutableArray(object: record)
+//        }
+//        self.saveRecordsToPlist(mutableRecords! as NSArray)
+//    }
+//    
+//    func saveRecordsToPlist(records: NSArray)
+//    {
+//        let recordsDict: NSDictionary = ["records": records]
+//        let manager = NSFileManager.defaultManager()
+//        let plistPath = APIUtils.plistPathForFilename(filename)
+//        if manager.fileExistsAtPath(plistPath) == false
+//        {
+//            let isCreated = manager.createFileAtPath(plistPath, contents: nil, attributes: nil)
+//            NSLog("创建结果: \(isCreated)")
+//        }
+//        else
+//        {
+//            let isWritten = recordsDict.writeToFile(plistPath, atomically: true)
+//            NSLog("写入结果: \(isWritten)")
+//        }
+//    }
 }
 

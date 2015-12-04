@@ -9,10 +9,16 @@
 import Foundation
 import UIKit
 
+protocol APIHistoryViewControllerDelegate
+{
+    func historyViewController(tableView: UITableView, didSelectRecord record: NSDictionary, atIndexPath indexPath: NSIndexPath)
+}
+
 class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
+    var delegate: APIHistoryViewControllerDelegate?
     var tableView: UITableView?
-    var records: NSArray?
+    var records: NSMutableArray?
     
     let reuseId = "historycell"
     
@@ -32,7 +38,7 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
             //取出历史记录
-            self.records = APIUtils.readRecordsFromPlist(APIUtils.plistPathForFilename(filename))
+            self.records = NSMutableArray(array: APIUtils.readRecordsFromPlist(APIUtils.plistPathForFilename(filename))!)
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.tableView?.reloadData()
             })
@@ -84,8 +90,29 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        
+        let record = self.records![indexPath.row]
+        self.delegate?.historyViewController(tableView, didSelectRecord: record as! NSDictionary, atIndexPath: indexPath)
+        self.navigationController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+            //do sth
+        })
     }
     
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
+    {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if editingStyle == UITableViewCellEditingStyle.Delete
+        {
+            let record = self.records?.objectAtIndex(indexPath.row)
+            self.records?.removeObject(record!)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), { () -> Void in
+                APIUtils.deleteRecordAtIndex(indexPath.row)
+            })
+        }
+    }
     
 }

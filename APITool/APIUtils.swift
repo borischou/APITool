@@ -32,4 +32,50 @@ class APIUtils: NSObject
             return nil
         }
     }
+    
+    static func deleteRecordAtIndex(index: Int) -> Bool
+    {
+        let records = self.readRecordsFromPlist(self.plistPathForFilename(filename))
+        if records != nil
+        {
+            let mutableRecords = NSMutableArray(array: records!)
+            mutableRecords.removeObjectAtIndex(index)
+            self.saveRecordsToPlist(mutableRecords.copy() as! NSArray)
+            return true
+        }
+        return false
+    }
+    
+    static func saveRecordToPlist(record: NSDictionary)
+    {
+        var mutableRecords: NSMutableArray?
+        if self.readRecordsFromPlist(self.plistPathForFilename(filename)) != nil
+        {
+            let records: NSArray = (self.readRecordsFromPlist(self.plistPathForFilename(filename)))!
+            mutableRecords = NSMutableArray(array: records)
+            mutableRecords!.addObject(record)
+        }
+        else
+        {
+            mutableRecords = NSMutableArray(object: record)
+        }
+        self.saveRecordsToPlist(mutableRecords! as NSArray)
+    }
+    
+    static func saveRecordsToPlist(records: NSArray)
+    {
+        let recordsDict: NSDictionary = ["records": records]
+        let manager = NSFileManager.defaultManager()
+        let plistPath = APIUtils.plistPathForFilename(filename)
+        if manager.fileExistsAtPath(plistPath) == false
+        {
+            let isCreated = manager.createFileAtPath(plistPath, contents: nil, attributes: nil)
+            NSLog("创建结果: \(isCreated)")
+        }
+        else
+        {
+            let isWritten = recordsDict.writeToFile(plistPath, atomically: true)
+            NSLog("写入结果: \(isWritten)")
+        }
+    }
 }
