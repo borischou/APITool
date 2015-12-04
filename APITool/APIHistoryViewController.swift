@@ -38,10 +38,14 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
             //取出历史记录
-            self.records = NSMutableArray(array: APIUtils.readRecordsFromPlist(APIUtils.plistPathForFilename(filename))!)
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.tableView?.reloadData()
-            })
+            let records = APIUtils.readRecordsFromPlist(APIUtils.plistPathForFilename(filename))
+            if records != nil && records?.count > 0
+            {
+                self.records = NSMutableArray(array: records!)
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.tableView?.reloadData()
+                })
+            }
         }
         
         //取消按钮

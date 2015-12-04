@@ -6,8 +6,8 @@
 //  Copyright © 2015年 Boris. All rights reserved.
 //
 
-import UIKit
 import Foundation
+import UIKit
 
 import ReactiveCocoa
 
@@ -77,11 +77,63 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //        let validUrlSignal: RACSignal = (self.headerView?.urlTextField?.rac_textSignal().map({ (text) -> AnyObject! in
 //            return NSNumber(bool: self.isValidUrl(text as! String))
 //        }))!
-//        
-//        RAC(self.headerView?.urlTextField, backgroundColor) = validUrlSignal.map({ (urlValid) -> AnyObject! in
+        
+        self.headerView?.urlTextField?.rac_textSignal().map({ (next) -> AnyObject! in
+            if let text: String? = next as? String
+            {
+                return self.isValidUrl(text!) ? UIColor.greenColor() : UIColor.redColor()
+            }
+        }).subscribeNext({ (next) -> Void in
+            if let color: UIColor? = next as? UIColor
+            {
+                self.headerView?.urlTextField?.layer.borderColor = color?.CGColor
+            }
+        })
+        
+//        RAC(self.headerView.urlTextField, "backgroundColor") = validUrlSignal.map({ (urlValid) -> AnyObject! in
 //            return urlValid.boolValue ? UIColor.greenColor() : UIColor.redColor()
 //        })
     }
+    
+    //MARK: RAC macro replacement
+    
+//    struct RAC  {
+//        var target : NSObject!
+//        var keyPath : String!
+//        var nilValue : AnyObject!
+//        
+//        init(_ target: NSObject!, _ keyPath: String, nilValue: AnyObject? = nil) {
+//            self.target = target
+//            self.keyPath = keyPath
+//            self.nilValue = nilValue
+//        }
+//        
+//        
+//        func assignSignal(signal : RACSignal) {
+//            signal.setKeyPath(self.keyPath, onObject: self.target, nilValue: self.nilValue)
+//        }
+//    }
+    
+//    struct RAC  {
+//        var target : NSObject!
+//        var keyPath : String!
+//        var nilValue : AnyObject!
+//        
+//        init(_ target: NSObject!, _ keyPath: String, nilValue: AnyObject? = nil) {
+//            self.target = target
+//            self.keyPath = keyPath
+//            self.nilValue = nilValue
+//        }
+//        
+//        func assignSignal(signal : RACSignal) {
+//            signal.setKeyPath(self.keyPath, onObject: self.target, nilValue: self.nilValue)
+//        }
+//    }
+    
+//    operator infix ~> {}
+//    @infix func ~> (signal: RACSignal, rac: RAC) {
+//    rac.assignSignal(signal)
+//    }
     
     //MARK: Custom
     
