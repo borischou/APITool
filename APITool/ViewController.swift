@@ -308,14 +308,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func sendingStateForSendButton(sender: UIButton)
     {
-        sender.enabled = false
         sender.setTitle("SENDING", forState: UIControlState.Disabled)
+        sender.enabled = false
     }
     
     func recoverStateForSendButton(sender: UIButton)
     {
-        sender.enabled = true
         sender.setTitle("SEND", forState: UIControlState.Disabled)
+        sender.enabled = true
     }
     
     func assembleURL() -> NSString
