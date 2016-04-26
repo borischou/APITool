@@ -13,7 +13,13 @@ import ReactiveCocoa
 
 let filename = "records.plist"
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, APIMethodURLTableHeaderViewDelegate, APIHistoryViewControllerDelegate
+class ViewController:
+    UIViewController,
+    UITableViewDataSource,
+    UITableViewDelegate,
+    UITextFieldDelegate,
+    APIMethodURLTableHeaderViewDelegate,
+    APIHistoryViewControllerDelegate
 {
     var tableView: UITableView?
     var sendButton: UIButton?
