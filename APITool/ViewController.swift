@@ -8,9 +8,9 @@
 
 import Foundation
 import UIKit
-
 import ReactiveCocoa
 
+let aScreenWidth: CGFloat = UIScreen.mainScreen().bounds.size.width
 let filename = "records.plist"
 
 class ViewController:
@@ -77,6 +77,11 @@ class ViewController:
         self.sendButton?.layer.shadowOffset = CGSizeMake(0, -3)
         self.sendButton?.addTarget(self, action: "sendButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(self.sendButton!)
+        
+        let footerView: APIAddParameterFooterView = APIAddParameterFooterView.init(frame: CGRectMake(0, 0, aScreenWidth, 50))
+        self.tableView?.tableFooterView = footerView
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: "tableFooterViewTapped:")
+        self.tableView?.tableFooterView?.addGestureRecognizer(tapGesture)
         
         //Reactive Cocoa
         
@@ -187,11 +192,19 @@ class ViewController:
             NSLog("POST")
             self.headerView?.methodLabel?.text = "POST"
         }
+        let headac = UIAlertAction(title: "HEAD", style: UIAlertActionStyle.Default) { (action) -> Void in
+            self.headerView?.methodLabel?.text = "HEAD"
+        }
+        let deleteac = UIAlertAction(title: "DELETE", style: UIAlertActionStyle.Default) { (action) -> Void in
+            self.headerView?.methodLabel?.text = "DELETE"
+        }
         let cancelac = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (action) -> Void in
             //do something
         }
         alertcontroller.addAction(getac)
         alertcontroller.addAction(postac)
+        alertcontroller.addAction(headac)
+        alertcontroller.addAction(deleteac)
         alertcontroller.addAction(cancelac)
         self.navigationController?.presentViewController(alertcontroller, animated: true, completion: { () -> Void in
             //do something
@@ -230,6 +243,16 @@ class ViewController:
     }
     
     // MARK: Helpers
+    
+    func tableFooterViewTapped(tap: UITapGestureRecognizer)
+    {
+        NSLog("tableFooterViewTapped")
+    }
+    
+    func createNewCell() -> Void
+    {
+        
+    }
     
     func autoSetRecord(record: NSDictionary)
     {

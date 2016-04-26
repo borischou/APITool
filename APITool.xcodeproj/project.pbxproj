@@ -12,6 +12,8 @@
 		45177EC41BF1CB7C00D6A8AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45177EC31BF1CB7C00D6A8AC /* Assets.xcassets */; };
 		45177EC71BF1CB7C00D6A8AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45177EC51BF1CB7C00D6A8AC /* LaunchScreen.storyboard */; };
 		45177ED51BF1D82C00D6A8AC /* APIParameterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45177ED41BF1D82C00D6A8AC /* APIParameterTableViewCell.swift */; };
+		45BA0CC71CCF51C8002B5B22 /* APIAddParameterFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BA0CC61CCF51C8002B5B22 /* APIAddParameterFooterView.swift */; };
+		45BA0CCE1CCF671C002B5B22 /* icon_add_row.png in Resources */ = {isa = PBXBuildFile; fileRef = 45BA0CCD1CCF671C002B5B22 /* icon_add_row.png */; };
 		45D8F22B1BF433A70011F906 /* group_tab_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D8F22A1BF433A70011F906 /* group_tab_icon@3x.png */; };
 		45D8F22D1BF4354F0011F906 /* APIHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8F22C1BF4354F0011F906 /* APIHistoryViewController.swift */; };
 		45D8F22F1BF4371D0011F906 /* APIHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8F22E1BF4371D0011F906 /* APIHistoryTableViewCell.swift */; };
@@ -47,6 +49,8 @@
 		45177EC61BF1CB7C00D6A8AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45177EC81BF1CB7C00D6A8AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45177ED41BF1D82C00D6A8AC /* APIParameterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIParameterTableViewCell.swift; sourceTree = "<group>"; };
+		45BA0CC61CCF51C8002B5B22 /* APIAddParameterFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIAddParameterFooterView.swift; sourceTree = "<group>"; };
+		45BA0CCD1CCF671C002B5B22 /* icon_add_row.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_add_row.png; sourceTree = "<group>"; };
 		45D8F22A1BF433A70011F906 /* group_tab_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "group_tab_icon@3x.png"; sourceTree = "<group>"; };
 		45D8F22C1BF4354F0011F906 /* APIHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHistoryViewController.swift; sourceTree = "<group>"; };
 		45D8F22E1BF4371D0011F906 /* APIHistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHistoryTableViewCell.swift; sourceTree = "<group>"; };
@@ -101,20 +105,62 @@
 		45177EBB1BF1CB7C00D6A8AC /* APITool */ = {
 			isa = PBXGroup;
 			children = (
+				45BA0CCB1CCF6710002B5B22 /* Resources */,
+				45BA0CCA1CCF51EC002B5B22 /* Models */,
+				45BA0CC91CCF51DF002B5B22 /* Controllers */,
+				45BA0CC81CCF51D0002B5B22 /* Views */,
 				450261571C1122AD00C55A23 /* Utils */,
 				45177EBC1BF1CB7C00D6A8AC /* AppDelegate.swift */,
-				45177EBE1BF1CB7C00D6A8AC /* ViewController.swift */,
-				45D8F22C1BF4354F0011F906 /* APIHistoryViewController.swift */,
-				45D8F22E1BF4371D0011F906 /* APIHistoryTableViewCell.swift */,
-				45EFFBD31BF30604003C5579 /* APIResultViewController.swift */,
-				45EFFBD11BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift */,
-				45177ED41BF1D82C00D6A8AC /* APIParameterTableViewCell.swift */,
-				45D8F22A1BF433A70011F906 /* group_tab_icon@3x.png */,
 				45177EC31BF1CB7C00D6A8AC /* Assets.xcassets */,
 				45177EC51BF1CB7C00D6A8AC /* LaunchScreen.storyboard */,
 				45177EC81BF1CB7C00D6A8AC /* Info.plist */,
 			);
 			path = APITool;
+			sourceTree = "<group>";
+		};
+		45BA0CC81CCF51D0002B5B22 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				45BA0CC61CCF51C8002B5B22 /* APIAddParameterFooterView.swift */,
+				45EFFBD11BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift */,
+				45D8F22E1BF4371D0011F906 /* APIHistoryTableViewCell.swift */,
+				45177ED41BF1D82C00D6A8AC /* APIParameterTableViewCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		45BA0CC91CCF51DF002B5B22 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				45177EBE1BF1CB7C00D6A8AC /* ViewController.swift */,
+				45D8F22C1BF4354F0011F906 /* APIHistoryViewController.swift */,
+				45EFFBD31BF30604003C5579 /* APIResultViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		45BA0CCA1CCF51EC002B5B22 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		45BA0CCB1CCF6710002B5B22 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				45BA0CCC1CCF6716002B5B22 /* Images */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		45BA0CCC1CCF6716002B5B22 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				45D8F22A1BF433A70011F906 /* group_tab_icon@3x.png */,
+				45BA0CCD1CCF671C002B5B22 /* icon_add_row.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		5997871E9DFBBC0F29C1FEB7 /* Frameworks */ = {
@@ -158,6 +204,7 @@
 				TargetAttributes = {
 					45177EB81BF1CB7C00D6A8AC = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = R8SXHLJ4HE;
 					};
 				};
 			};
@@ -187,6 +234,7 @@
 				45177EC71BF1CB7C00D6A8AC /* LaunchScreen.storyboard in Resources */,
 				45D8F22B1BF433A70011F906 /* group_tab_icon@3x.png in Resources */,
 				45177EC41BF1CB7C00D6A8AC /* Assets.xcassets in Resources */,
+				45BA0CCE1CCF671C002B5B22 /* icon_add_row.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +250,7 @@
 				45177EBF1BF1CB7C00D6A8AC /* ViewController.swift in Sources */,
 				45177EBD1BF1CB7C00D6A8AC /* AppDelegate.swift in Sources */,
 				45D8F2331BF479220011F906 /* APIUtils.swift in Sources */,
+				45BA0CC71CCF51C8002B5B22 /* APIAddParameterFooterView.swift in Sources */,
 				45EFFBD21BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift in Sources */,
 				45D8F22F1BF4371D0011F906 /* APIHistoryTableViewCell.swift in Sources */,
 				45EFFBD41BF30604003C5579 /* APIResultViewController.swift in Sources */,
@@ -309,6 +358,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -325,6 +375,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

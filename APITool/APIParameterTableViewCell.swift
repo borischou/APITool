@@ -39,6 +39,7 @@ class APIParameterTableViewCell: UITableViewCell
         self.keyTextField?.clearButtonMode = UITextFieldViewMode.Always
         self.keyTextField?.autocapitalizationType = UITextAutocapitalizationType.None
         self.keyTextField?.keyboardType = UIKeyboardType.ASCIICapable
+        self.keyTextField?.layer.cornerRadius = 3.0;
         self.contentView.addSubview(self.keyTextField!)
         
         self.valueTextField = UITextField()
@@ -48,6 +49,7 @@ class APIParameterTableViewCell: UITableViewCell
         self.valueTextField?.clearButtonMode = UITextFieldViewMode.Always
         self.valueTextField?.autocapitalizationType = UITextAutocapitalizationType.None
         self.valueTextField?.keyboardType = UIKeyboardType.ASCIICapable
+        self.valueTextField?.layer.cornerRadius = 3.0
         self.contentView.addSubview(self.valueTextField!)
         
         self.deleteButton = UIButton()
@@ -57,13 +59,14 @@ class APIParameterTableViewCell: UITableViewCell
         self.deleteButton?.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         self.deleteButton?.backgroundColor = UIColor.greenColor()
         self.deleteButton?.addTarget(self, action: "deleteButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.deleteButton?.layer.cornerRadius = 3.0
         self.contentView.addSubview(self.deleteButton!)
     }
     
     func deleteButtonPressed(sender: UIButton)
     {
-        self.keyTextField?.text = ""
-        self.valueTextField?.text = ""
+        self.keyTextField?.text = nil
+        self.valueTextField?.text = nil
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)

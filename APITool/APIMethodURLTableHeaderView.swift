@@ -33,6 +33,8 @@ class APIMethodURLTableHeaderView: UIView
     
     func initSubviews()
     {
+        self.backgroundColor = UIColor.lightTextColor()
+        
         let itemWidth = UIScreen.mainScreen().bounds.size.width - 20
         let itemHeight: CGFloat = 50.0
         
@@ -44,6 +46,8 @@ class APIMethodURLTableHeaderView: UIView
         self.methodLabel?.textColor = UIColor.whiteColor()
         self.methodLabel?.text = "GET"
         self.methodLabel?.textAlignment = NSTextAlignment.Center
+        self.methodLabel?.layer.cornerRadius = 3.0
+        self.methodLabel?.clipsToBounds = true
         self.addSubview(self.methodLabel!)
         
         self.urlTextField = UITextField()
@@ -54,6 +58,7 @@ class APIMethodURLTableHeaderView: UIView
         self.urlTextField?.autocapitalizationType = UITextAutocapitalizationType.None
         self.urlTextField?.placeholder = "Enter URL here"
         self.urlTextField?.keyboardType = UIKeyboardType.ASCIICapable
+        self.urlTextField?.layer.cornerRadius = 3.0
         self.addSubview(self.urlTextField!)
     }
     
