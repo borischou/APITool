@@ -351,17 +351,17 @@ class ViewController:
         }
         self.sendingStateForSendButton(sender)
         
+        let urlstr = self.assembleURL()
+        let request = self.assembleNSURLRequest(urlstr as String)
+        let urltext = self.validateURL((self.headerView?.urlTextField?.text)!)
+        let methodtext = self.headerView?.methodLabel?.text
         let paramDict: NSMutableDictionary = NSMutableDictionary()
         for param: APIParameter in self.params! as [APIParameter]
         {
             paramDict.setObject(param.value!, forKey: param.key!)
         }
-        
-        let urlstr = self.assembleURL()
-        let request = self.assembleNSURLRequest(urlstr as String)
-        let urltext = self.validateURL((self.headerView?.urlTextField?.text)!)
-        let methodtext = self.headerView?.methodLabel?.text
         let recordDict = self.assembleNSDictionary(urltext, params: paramDict, method: methodtext!)
+        
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) { () -> Void in
             APIUtils.saveRecordToPlist(recordDict)
@@ -401,7 +401,7 @@ class ViewController:
     
     func assembleURL() -> NSString
     {
-        let params: [APIParameter] = [APIParameter]()
+        var params: [APIParameter] = [APIParameter]()
         for index in 0...((self.params?.count)! - 1)
         {
             let indexPath = NSIndexPath(forRow: index, inSection: 0)
@@ -412,14 +412,14 @@ class ViewController:
             }
             else
             {
-                let key: String = (cell.valueTextField?.text?.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: " ")))!
-                let value: String = (cell.keyTextField?.text?.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: " ")))!
+                let value: String = (cell.valueTextField?.text?.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: " ")))!
+                let key: String = (cell.keyTextField?.text?.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: " ")))!
                 let param: APIParameter = APIParameter(key: key, value: value)
-                self.params?.append(param)
+                params.append(param)
             }
             
         }
-        NSLog("params: \(self.params)\nmethod: \(self.headerView?.methodLabel?.text)")
+        NSLog("params: \(params)\nmethod: \(self.headerView?.methodLabel?.text)")
         
         var urlstr: NSString?
         
@@ -436,11 +436,11 @@ class ViewController:
         {
             if param.key!.isEqual(params.first) == true //第一个参数不加&
             {
-                urlstr = urlstr!.stringByAppendingFormat("\(param.key)=\((param.value)!)")
+                urlstr = urlstr!.stringByAppendingFormat("\((param.key)!)=\((param.value)!)")
             }
             else
             {
-                urlstr = urlstr!.stringByAppendingFormat("&\(param.key)=\((param.value)!)")
+                urlstr = urlstr!.stringByAppendingFormat("&\((param.key)!)=\((param.value)!)")
             }
         }
         
