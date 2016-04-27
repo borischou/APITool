@@ -12,6 +12,9 @@ import ReactiveCocoa
 
 let aScreenWidth: CGFloat = UIScreen.mainScreen().bounds.size.width
 let filename = "records.plist"
+let KEY_URL = "url"
+let KEY_METHOD = "method"
+let KEY_PARAMETERS = "params"
 
 class ViewController:
     UIViewController,
@@ -24,9 +27,10 @@ class ViewController:
     var tableView: UITableView?
     var sendButton: UIButton?
     var headerView: APIMethodURLTableHeaderView?
-    var rowNumber: NSInteger?
     var historyBarbutton: UIBarButtonItem?
-    var params: NSMutableDictionary?
+
+    var params: [APIParameter]? //var makes the [dataType] mutable 
+                                //NSMutableArray/NSMutableDictionary cannot be implicitly bridged to Swift
     
     let sendButtonHeight: CGFloat = 60.0
     let headerViewHeight: CGFloat = 200.0
@@ -37,7 +41,7 @@ class ViewController:
         self.view.backgroundColor = UIColor.whiteColor()
         self.title = "API Tool"
         
-        self.rowNumber = 3
+        self.loadInitParams()
         
         //历史记录
         let historyButton = UIButton(type: UIButtonType.Custom)
@@ -148,6 +152,15 @@ class ViewController:
     
     //MARK: Custom
     
+    func loadInitParams() -> Void
+    {
+        self.params = [APIParameter]()
+        for _ in 0...3
+        {
+            self.params?.append(APIParameter(key: "", value: ""))
+        }
+    }
+    
     func isValidUrl(url: String) -> Bool
     {
         return url.characters.count >= 4
@@ -171,12 +184,32 @@ class ViewController:
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return self.rowNumber!
+        return (self.params?.count)!
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         return 50
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
+    {
+        if indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2
+        {
+            return false
+        }
+        else
+        {
+            return true
+        }
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if editingStyle == UITableViewCellEditingStyle.Delete
+        {
+            self.deleteCellWithModel(indexPath)
+        }
     }
     
     // MARK: APIMethodURLTableHeaderViewDelegate
@@ -247,11 +280,24 @@ class ViewController:
     func tableFooterViewTapped(tap: UITapGestureRecognizer)
     {
         NSLog("tableFooterViewTapped")
+        self.createNewCell()
     }
     
     func createNewCell() -> Void
     {
-        
+        self.params?.append(APIParameter(key: "", value: ""))
+        self.tableView?.beginUpdates()
+        let indexPath: NSIndexPath = NSIndexPath(forRow: self.params!.count - 1, inSection: 0)
+        self.tableView?.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        self.tableView?.endUpdates()
+    }
+    
+    func deleteCellWithModel(indexPath: NSIndexPath) -> Void
+    {
+        self.params?.removeAtIndex(indexPath.row)
+        self.tableView?.beginUpdates()
+        self.tableView?.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        self.tableView?.endUpdates()
     }
     
     func autoSetRecord(record: NSDictionary)
@@ -305,11 +351,17 @@ class ViewController:
         }
         self.sendingStateForSendButton(sender)
         
+        let paramDict: NSMutableDictionary = NSMutableDictionary()
+        for param: APIParameter in self.params! as [APIParameter]
+        {
+            paramDict.setObject(param.value!, forKey: param.key!)
+        }
+        
         let urlstr = self.assembleURL()
         let request = self.assembleNSURLRequest(urlstr as String)
         let urltext = self.validateURL((self.headerView?.urlTextField?.text)!)
         let methodtext = self.headerView?.methodLabel?.text
-        let recordDict = self.assembleNSDictionary(urltext, params: self.params, method: methodtext!)
+        let recordDict = self.assembleNSDictionary(urltext, params: paramDict, method: methodtext!)
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) { () -> Void in
             APIUtils.saveRecordToPlist(recordDict)
@@ -349,8 +401,8 @@ class ViewController:
     
     func assembleURL() -> NSString
     {
-        let params: NSMutableDictionary = NSMutableDictionary()
-        for index in 0...(self.rowNumber! - 1)
+        let params: [APIParameter] = [APIParameter]()
+        for index in 0...((self.params?.count)! - 1)
         {
             let indexPath = NSIndexPath(forRow: index, inSection: 0)
             let cell = self.tableView?.cellForRowAtIndexPath(indexPath) as! APIParameterTableViewCell
@@ -360,10 +412,12 @@ class ViewController:
             }
             else
             {
-                params.setValue((cell.valueTextField?.text?.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: " ")))!,
-                    forKey: (cell.keyTextField?.text?.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: " ")))!)
+                let key: String = (cell.valueTextField?.text?.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: " ")))!
+                let value: String = (cell.keyTextField?.text?.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: " ")))!
+                let param: APIParameter = APIParameter(key: key, value: value)
+                self.params?.append(param)
             }
-            self.params = params
+            
         }
         NSLog("params: \(self.params)\nmethod: \(self.headerView?.methodLabel?.text)")
         
@@ -378,15 +432,15 @@ class ViewController:
             urlstr = "https://" + (self.headerView?.urlTextField?.text)! + "?"
         }
         
-        for key in params.allKeys
+        for param: APIParameter in params
         {
-            if key.isEqual(params.allKeys.first) == true //第一个参数不加&
+            if param.key!.isEqual(params.first) == true //第一个参数不加&
             {
-                urlstr = urlstr!.stringByAppendingFormat("\(key)=\((params.valueForKey(key as! String))!)")
+                urlstr = urlstr!.stringByAppendingFormat("\(param.key)=\((param.value)!)")
             }
             else
             {
-                urlstr = urlstr!.stringByAppendingFormat("&\(key)=\((params.valueForKey(key as! String))!)")
+                urlstr = urlstr!.stringByAppendingFormat("&\(param.key)=\((param.value)!)")
             }
         }
         
@@ -420,9 +474,9 @@ class ViewController:
     func assembleNSDictionary(url: String, params: NSDictionary?, method: String) -> NSDictionary
     {
         let record: NSMutableDictionary = NSMutableDictionary()
-        record.setValue(url, forKey: "url")
-        record.setValue(params, forKey: "params")
-        record.setValue(method, forKey: "method")
+        record.setValue(url, forKey: KEY_URL)
+        record.setValue(params, forKey: KEY_PARAMETERS)
+        record.setValue(method, forKey: KEY_METHOD)
         return record
     }
     

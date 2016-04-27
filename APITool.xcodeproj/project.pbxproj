@@ -24,6 +24,7 @@
 		45E403941C06EF2F00D40920 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45E403901C06EF2F00D40920 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45EFFBD21BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EFFBD11BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift */; };
 		45EFFBD41BF30604003C5579 /* APIResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EFFBD31BF30604003C5579 /* APIResultViewController.swift */; };
+		45F2F79E1CD04CE500EA4AFF /* APIParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F2F79D1CD04CE500EA4AFF /* APIParameter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,6 +61,7 @@
 		45E403901C06EF2F00D40920 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		45EFFBD11BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMethodURLTableHeaderView.swift; sourceTree = "<group>"; };
 		45EFFBD31BF30604003C5579 /* APIResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResultViewController.swift; sourceTree = "<group>"; };
+		45F2F79D1CD04CE500EA4AFF /* APIParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIParameter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 		45BA0CCA1CCF51EC002B5B22 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				45F2F79D1CD04CE500EA4AFF /* APIParameter.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				45177EBD1BF1CB7C00D6A8AC /* AppDelegate.swift in Sources */,
 				45D8F2331BF479220011F906 /* APIUtils.swift in Sources */,
 				45BA0CC71CCF51C8002B5B22 /* APIAddParameterFooterView.swift in Sources */,
+				45F2F79E1CD04CE500EA4AFF /* APIParameter.swift in Sources */,
 				45EFFBD21BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift in Sources */,
 				45D8F22F1BF4371D0011F906 /* APIHistoryTableViewCell.swift in Sources */,
 				45EFFBD41BF30604003C5579 /* APIResultViewController.swift in Sources */,
@@ -368,6 +372,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = boris.APITool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -385,6 +390,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = boris.APITool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
