@@ -41,7 +41,7 @@ class APIMethodURLTableHeaderView: UIView
         self.methodLabel = UILabel()
         self.methodLabel?.frame = CGRectMake(10, 20, itemWidth, itemHeight)
         self.methodLabel?.userInteractionEnabled = true
-        self.methodLabel?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "methodLabelTapped"))
+        self.methodLabel?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "methodLabelTapped:"))
         self.methodLabel?.backgroundColor = UIColor.greenColor()
         self.methodLabel?.textColor = UIColor.whiteColor()
         self.methodLabel?.text = "GET"
@@ -62,7 +62,7 @@ class APIMethodURLTableHeaderView: UIView
         self.addSubview(self.urlTextField!)
     }
     
-    func methodLabelTapped()
+    func methodLabelTapped(tap: UITapGestureRecognizer) -> Void
     {
         NSLog("methodLabelTapped")
         self.delegate?.APIMethodURL(self, didTapMethod: self.methodLabel!)

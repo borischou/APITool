@@ -36,6 +36,15 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
         self.tableView!.registerClass(UITableViewCell.self, forCellReuseIdentifier: reuseId)
         self.view.addSubview(self.tableView!)
         
+        self.fetchHistoryURLs()
+        
+        //取消按钮
+        let cancelBarbutton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelBarbuttonPressed")
+        self.navigationItem.leftBarButtonItem = cancelBarbutton
+    }
+    
+    func fetchHistoryURLs() -> Void
+    {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
             //取出历史记录
             let records = APIUtils.readRecordsFromPlist(APIUtils.plistPathForFilename(filename))
@@ -47,10 +56,6 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
                 })
             }
         }
-        
-        //取消按钮
-        let cancelBarbutton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelBarbuttonPressed")
-        self.navigationItem.leftBarButtonItem = cancelBarbutton
     }
     
     func cancelBarbuttonPressed()
