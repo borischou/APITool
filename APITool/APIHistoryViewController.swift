@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import ReactiveCocoa
 
 protocol APIHistoryViewControllerDelegate
 {
@@ -36,32 +37,76 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
         self.tableView!.registerClass(UITableViewCell.self, forCellReuseIdentifier: reuseId)
         self.view.addSubview(self.tableView!)
         
-        self.fetchHistoryURLs()
-        
         //取消按钮
-        let cancelBarbutton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelBarbuttonPressed")
-        self.navigationItem.leftBarButtonItem = cancelBarbutton
+        let cancelBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelBarbuttonPressed:")
+        self.navigationItem.leftBarButtonItem = cancelBarButton
+        
+        let clearBarButton = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.Plain, target: self, action: "clearBarButtonPressed:")
+        self.navigationItem.rightBarButtonItem = clearBarButton
+        
+        self.fetchHistoryURLs()
+
+        let validSignal = self.validTableDataRACSignal()
+        validSignal.subscribeNext { (AnyObject) -> Void in
+            self.navigationItem.rightBarButtonItem!.enabled = AnyObject.boolValue
+        }
+    }
+    
+    func validTableDataRACSignal() -> RACSignal
+    {
+        return RACSignal.createSignal { (subscriber) -> RACDisposable! in
+            if self.records == nil || self.records?.count == 0
+            {
+                subscriber.sendNext(false)
+            }
+            else
+            {
+                subscriber.sendNext(true)
+            }
+            subscriber.sendCompleted()
+            return nil
+        }
     }
     
     func fetchHistoryURLs() -> Void
     {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-            //取出历史记录
-            let records = APIUtils.readRecordsFromPlist(APIUtils.plistPathForFilename(filename))
-            if records != nil && records?.count > 0
-            {
-                self.records = NSMutableArray(array: records!)
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.tableView?.reloadData()
-                })
-            }
+        //取出历史记录
+        let records = APIUtils.readRecordsFromPlist(APIUtils.plistPathForFilename(filename))
+        if records != nil && records?.count > 0
+        {
+            self.records = NSMutableArray(array: records!)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tableView?.reloadData()
+            })
         }
     }
     
-    func cancelBarbuttonPressed()
+    func cancelBarbuttonPressed(sender: UIBarButtonItem)
     {
         self.navigationController?.dismissViewControllerAnimated(true, completion: { () -> Void in
             //do something
+        })
+    }
+    
+    func clearBarButtonPressed(sender: UIBarButtonItem)
+    {
+        let ac = UIAlertController(title: "Clear history", message: "Do you want to clear it all?", preferredStyle: UIAlertControllerStyle.Alert)
+        let confirmAction = UIAlertAction(title: "Clear", style: UIAlertActionStyle.Default) { (action) -> Void in
+            self.records?.removeAllObjects()
+            self.records = nil
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+                APIUtils.removeAllRecords()
+            })
+            self.tableView?.reloadData()
+            self.navigationItem.rightBarButtonItem?.enabled = false
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (action) -> Void in
+            
+        }
+        ac.addAction(confirmAction)
+        ac.addAction(cancelAction)
+        self.navigationController?.presentViewController(ac, animated: true, completion: { () -> Void in
+            
         })
     }
     

@@ -46,6 +46,21 @@ class APIUtils: NSObject
         return false
     }
     
+    static func removeAllRecords()
+    {
+        let records = self.readRecordsFromPlist(self.plistPathForFilename(filename))
+        if records == nil
+        {
+            return
+        }
+        else
+        {
+            let mutableRecords = NSMutableArray(array: records!)
+            mutableRecords.removeAllObjects()
+            self.saveRecordsToPlist(mutableRecords.copy() as! NSArray)
+        }
+    }
+    
     static func saveRecordToPlist(record: NSDictionary)
     {
         var mutableRecords: NSMutableArray
