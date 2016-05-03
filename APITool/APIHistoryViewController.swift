@@ -52,6 +52,8 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
+    // MARK: Helpers
+
     func validTableDataRACSignal() -> RACSignal
     {
         return RACSignal.createSignal { (subscriber) -> RACDisposable! in
@@ -109,8 +111,6 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
             
         })
     }
-    
-    // MARK: Helpers
     
     func cleanCell(cell: UITableViewCell)
     {

@@ -46,7 +46,7 @@ class ViewController:
         //历史记录
         let historyButton = UIButton(type: UIButtonType.Custom)
         historyButton.frame = CGRectMake(0, 0, 23, 23)
-        historyButton.setImage(UIImage(named: "group_tab_icon") , forState: UIControlState.Normal)
+        historyButton.setImage(UIImage(named: "icon_group_tab") , forState: UIControlState.Normal)
         historyButton.addTarget(self, action: "historyButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
         self.historyBarbutton = UIBarButtonItem(customView: historyButton)
         self.navigationItem.leftBarButtonItem = self.historyBarbutton
