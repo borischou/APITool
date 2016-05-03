@@ -56,7 +56,7 @@ class APIMethodURLTableHeaderView: UIView
         self.urlTextField?.font = UIFont.systemFontOfSize(13.0)
         self.urlTextField?.clearButtonMode = UITextFieldViewMode.Always
         self.urlTextField?.autocapitalizationType = UITextAutocapitalizationType.None
-        self.urlTextField?.placeholder = "Enter URL here"
+        self.urlTextField?.placeholder = "Input API URL here"
         self.urlTextField?.keyboardType = UIKeyboardType.ASCIICapable
         self.urlTextField?.layer.cornerRadius = 3.0
         self.addSubview(self.urlTextField!)

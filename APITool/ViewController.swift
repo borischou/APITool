@@ -302,8 +302,8 @@ class ViewController:
     
     func autoSetRecord(record: NSDictionary)
     {
-        self.headerView?.urlTextField?.text = record["url"] as? String
-        self.headerView?.methodLabel?.text = record["method"] as? String
+        self.headerView?.urlTextField?.text = record[KEY_URL] as? String
+        self.headerView?.methodLabel?.text = record[KEY_METHOD] as? String
     }
     
     func historyButtonPressed()
@@ -417,7 +417,6 @@ class ViewController:
                 let param: APIParameter = APIParameter(key: key, value: value)
                 params.append(param)
             }
-            
         }
         NSLog("params: \(params)\nmethod: \(self.headerView?.methodLabel?.text)")
         
