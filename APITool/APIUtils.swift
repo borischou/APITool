@@ -10,7 +10,7 @@ import Foundation
 
 class APIUtils: NSObject
 {
-    static func plistPathForFilename(filename: String) -> String
+    class func plistPathForFilename(filename: String) -> String
     {
         //获取Library/Caches目录
         let paths: NSArray = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)
@@ -20,7 +20,7 @@ class APIUtils: NSObject
         return cachesDirectory.stringByAppendingPathComponent(filename)
     }
     
-    static func readRecordsFromPlist(path: String) -> NSArray?
+    class func readRecordsFromPlist(path: String) -> NSArray?
     {
         let recordsDict: NSDictionary? = NSDictionary(contentsOfFile: path)
         if recordsDict != nil && recordsDict!["records"] != nil
@@ -33,7 +33,7 @@ class APIUtils: NSObject
         }
     }
     
-    static func deleteRecordAtIndex(index: Int) -> Bool
+    class func deleteRecordAtIndex(index: Int) -> Bool
     {
         let records = self.readRecordsFromPlist(self.plistPathForFilename(filename))
         if records != nil
@@ -46,7 +46,7 @@ class APIUtils: NSObject
         return false
     }
     
-    static func removeAllRecords()
+    class func removeAllRecords()
     {
         let records = self.readRecordsFromPlist(self.plistPathForFilename(filename))
         if records == nil
@@ -61,7 +61,7 @@ class APIUtils: NSObject
         }
     }
     
-    static func saveRecordToPlist(record: NSDictionary)
+    class func saveRecordToPlist(record: NSDictionary)
     {
         var mutableRecords: NSMutableArray
         if self.readRecordsFromPlist(self.plistPathForFilename(filename)) != nil
@@ -77,7 +77,7 @@ class APIUtils: NSObject
         self.saveRecordsToPlist(mutableRecords as NSArray)
     }
     
-    static func saveRecordsToPlist(records: NSArray)
+    class func saveRecordsToPlist(records: NSArray)
     {
         let recordsDict: NSDictionary = ["records": records]
         let manager = NSFileManager.defaultManager()
