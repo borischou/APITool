@@ -38,18 +38,31 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
         self.view.addSubview(self.tableView!)
         
         //取消按钮
-        let cancelBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelBarbuttonPressed:")
+        let cancelBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(APIHistoryViewController.cancelBarbuttonPressed(_:)))
         self.navigationItem.leftBarButtonItem = cancelBarButton
         
-        let clearBarButton = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.Plain, target: self, action: "clearBarButtonPressed:")
+        let clearBarButton = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(APIHistoryViewController.clearBarButtonPressed(_:)))
         self.navigationItem.rightBarButtonItem = clearBarButton
         
-        self.fetchHistoryURLs()
-
-        let validSignal = self.validTableDataRACSignal()
-        validSignal.subscribeNext { (AnyObject) -> Void in
-            self.navigationItem.rightBarButtonItem!.enabled = AnyObject.boolValue
+        self.records = NSMutableArray()
+        records?.mutableArrayValueForKeyPath("records")
+        rac_valuesForKeyPath("records", observer: self)
+        
+        let recordSignal: RACSignal = self.rac_valuesAndChangesForKeyPath("records", options: NSKeyValueObservingOptions.New, observer: self)
+        recordSignal.subscribeNext { (tuple) -> Void in
+            if let tup = tuple as? RACTuple
+            {
+                let arr: NSMutableArray? = tup.first as? NSMutableArray
+                self.navigationItem.rightBarButtonItem?.enabled = arr?.count > 0 ? true : false
+            }
         }
+        
+        self.fetchHistoryURLs()
+        
+//        let validSignal = self.validTableDataRACSignal()
+//        validSignal.subscribeNext { (AnyObject) -> Void in
+//            self.navigationItem.rightBarButtonItem!.enabled = AnyObject.boolValue
+//        }
     }
     
     // MARK: Helpers

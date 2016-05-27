@@ -12,28 +12,31 @@
 		45177EC41BF1CB7C00D6A8AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45177EC31BF1CB7C00D6A8AC /* Assets.xcassets */; };
 		45177EC71BF1CB7C00D6A8AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45177EC51BF1CB7C00D6A8AC /* LaunchScreen.storyboard */; };
 		45177ED51BF1D82C00D6A8AC /* APIParameterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45177ED41BF1D82C00D6A8AC /* APIParameterTableViewCell.swift */; };
+		4524BACA1CF7DDE300E7296D /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4524BAC81CF7DDE300E7296D /* ReactiveCocoa.framework */; };
+		4524BACB1CF7DDE300E7296D /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4524BAC91CF7DDE300E7296D /* Result.framework */; };
+		4524BACE1CF7E2CA00E7296D /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4524BACC1CF7E2CA00E7296D /* ReactiveCocoa.framework */; };
+		4524BACF1CF7E2CA00E7296D /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4524BACC1CF7E2CA00E7296D /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4524BAD01CF7E2CA00E7296D /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4524BACD1CF7E2CA00E7296D /* Result.framework */; };
+		4524BAD11CF7E2CA00E7296D /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4524BACD1CF7E2CA00E7296D /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4584FA8A1CDC69D200368407 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 4584FA891CDC69D200368407 /* Cartfile */; };
 		45BA0CC71CCF51C8002B5B22 /* APIAddParameterFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BA0CC61CCF51C8002B5B22 /* APIAddParameterFooterView.swift */; };
 		45D8F22D1BF4354F0011F906 /* APIHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8F22C1BF4354F0011F906 /* APIHistoryViewController.swift */; };
 		45D8F22F1BF4371D0011F906 /* APIHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8F22E1BF4371D0011F906 /* APIHistoryTableViewCell.swift */; };
 		45D8F2331BF479220011F906 /* APIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8F2321BF479220011F906 /* APIUtils.swift */; };
-		45E403911C06EF2F00D40920 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E4038F1C06EF2F00D40920 /* ReactiveCocoa.framework */; };
-		45E403921C06EF2F00D40920 /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45E4038F1C06EF2F00D40920 /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		45E403931C06EF2F00D40920 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E403901C06EF2F00D40920 /* Result.framework */; };
-		45E403941C06EF2F00D40920 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45E403901C06EF2F00D40920 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45EFFBD21BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EFFBD11BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift */; };
 		45EFFBD41BF30604003C5579 /* APIResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EFFBD31BF30604003C5579 /* APIResultViewController.swift */; };
 		45F2F79E1CD04CE500EA4AFF /* APIParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F2F79D1CD04CE500EA4AFF /* APIParameter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		45E403851C06E2D400D40920 /* Embed Frameworks */ = {
+		4524BAD21CF7E2CB00E7296D /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				45E403921C06EF2F00D40920 /* ReactiveCocoa.framework in Embed Frameworks */,
-				45E403941C06EF2F00D40920 /* Result.framework in Embed Frameworks */,
+				4524BACF1CF7E2CA00E7296D /* ReactiveCocoa.framework in Embed Frameworks */,
+				4524BAD11CF7E2CA00E7296D /* Result.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,13 +51,15 @@
 		45177EC61BF1CB7C00D6A8AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45177EC81BF1CB7C00D6A8AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45177ED41BF1D82C00D6A8AC /* APIParameterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIParameterTableViewCell.swift; sourceTree = "<group>"; };
+		4524BAC81CF7DDE300E7296D /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
+		4524BAC91CF7DDE300E7296D /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		4524BACC1CF7E2CA00E7296D /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
+		4524BACD1CF7E2CA00E7296D /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		4584FA891CDC69D200368407 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		45BA0CC61CCF51C8002B5B22 /* APIAddParameterFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIAddParameterFooterView.swift; sourceTree = "<group>"; };
 		45D8F22C1BF4354F0011F906 /* APIHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHistoryViewController.swift; sourceTree = "<group>"; };
 		45D8F22E1BF4371D0011F906 /* APIHistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		45D8F2321BF479220011F906 /* APIUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUtils.swift; sourceTree = "<group>"; };
-		45E403801C06E2B200D40920 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
-		45E4038F1C06EF2F00D40920 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
-		45E403901C06EF2F00D40920 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		45EFFBD11BF2CA80003C5579 /* APIMethodURLTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMethodURLTableHeaderView.swift; sourceTree = "<group>"; };
 		45EFFBD31BF30604003C5579 /* APIResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResultViewController.swift; sourceTree = "<group>"; };
 		45F2F79D1CD04CE500EA4AFF /* APIParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIParameter.swift; sourceTree = "<group>"; };
@@ -65,8 +70,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45E403911C06EF2F00D40920 /* ReactiveCocoa.framework in Frameworks */,
-				45E403931C06EF2F00D40920 /* Result.framework in Frameworks */,
+				4524BACA1CF7DDE300E7296D /* ReactiveCocoa.framework in Frameworks */,
+				4524BACE1CF7E2CA00E7296D /* ReactiveCocoa.framework in Frameworks */,
+				4524BACB1CF7DDE300E7296D /* Result.framework in Frameworks */,
+				4524BAD01CF7E2CA00E7296D /* Result.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,8 +91,8 @@
 		45177EB01BF1CB7C00D6A8AC = {
 			isa = PBXGroup;
 			children = (
-				45E4038F1C06EF2F00D40920 /* ReactiveCocoa.framework */,
-				45E403901C06EF2F00D40920 /* Result.framework */,
+				4524BACC1CF7E2CA00E7296D /* ReactiveCocoa.framework */,
+				4524BACD1CF7E2CA00E7296D /* Result.framework */,
 				45177EBB1BF1CB7C00D6A8AC /* APITool */,
 				45177EBA1BF1CB7C00D6A8AC /* Products */,
 				5997871E9DFBBC0F29C1FEB7 /* Frameworks */,
@@ -103,6 +110,7 @@
 		45177EBB1BF1CB7C00D6A8AC /* APITool */ = {
 			isa = PBXGroup;
 			children = (
+				4584FA891CDC69D200368407 /* Cartfile */,
 				45BA0CCB1CCF6710002B5B22 /* Resources */,
 				45BA0CCA1CCF51EC002B5B22 /* Models */,
 				45BA0CC91CCF51DF002B5B22 /* Controllers */,
@@ -163,7 +171,8 @@
 		5997871E9DFBBC0F29C1FEB7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				45E403801C06E2B200D40920 /* ReactiveCocoa.framework */,
+				4524BAC81CF7DDE300E7296D /* ReactiveCocoa.framework */,
+				4524BAC91CF7DDE300E7296D /* Result.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -178,7 +187,7 @@
 				45177EB51BF1CB7C00D6A8AC /* Sources */,
 				45177EB61BF1CB7C00D6A8AC /* Frameworks */,
 				45177EB71BF1CB7C00D6A8AC /* Resources */,
-				45E403851C06E2D400D40920 /* Embed Frameworks */,
+				4524BAD21CF7E2CB00E7296D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -228,6 +237,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4584FA8A1CDC69D200368407 /* Cartfile in Resources */,
 				45177EC71BF1CB7C00D6A8AC /* LaunchScreen.storyboard in Resources */,
 				45177EC41BF1CB7C00D6A8AC /* Assets.xcassets in Resources */,
 			);

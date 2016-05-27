@@ -58,7 +58,7 @@ class APIParameterTableViewCell: UITableViewCell
         self.deleteButton?.titleLabel?.font = UIFont.systemFontOfSize(13.0)
         self.deleteButton?.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         self.deleteButton?.backgroundColor = UIColor.greenColor()
-        self.deleteButton?.addTarget(self, action: "deleteButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.deleteButton?.addTarget(self, action: #selector(APIParameterTableViewCell.deleteButtonPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.deleteButton?.layer.cornerRadius = 3.0
         self.contentView.addSubview(self.deleteButton!)
     }

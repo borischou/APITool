@@ -47,7 +47,7 @@ class ViewController:
         let historyButton = UIButton(type: UIButtonType.Custom)
         historyButton.frame = CGRectMake(0, 0, 23, 23)
         historyButton.setImage(UIImage(named: "icon_group_tab") , forState: UIControlState.Normal)
-        historyButton.addTarget(self, action: "historyButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        historyButton.addTarget(self, action: #selector(ViewController.historyButtonPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.historyBarbutton = UIBarButtonItem(customView: historyButton)
         self.navigationItem.leftBarButtonItem = self.historyBarbutton
         
@@ -79,12 +79,12 @@ class ViewController:
         self.sendButton?.layer.shadowColor = UIColor.blackColor().CGColor
         self.sendButton?.layer.shadowOpacity = 0.3
         self.sendButton?.layer.shadowOffset = CGSizeMake(0, -3)
-        self.sendButton?.addTarget(self, action: "sendButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.sendButton?.addTarget(self, action: #selector(ViewController.sendButtonPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(self.sendButton!)
         
         let footerView: APIAddParameterFooterView = APIAddParameterFooterView.init(frame: CGRectMake(0, 0, aScreenWidth, 50))
         self.tableView?.tableFooterView = footerView
-        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: "tableFooterViewTapped:")
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(ViewController.tableFooterViewTapped(_:)))
         self.tableView?.tableFooterView?.addGestureRecognizer(tapGesture)
         
         //Reactive Cocoa
@@ -306,7 +306,7 @@ class ViewController:
         self.headerView?.methodLabel?.text = record[KEY_METHOD] as? String
     }
     
-    func historyButtonPressed()
+    func historyButtonPressed(sender: UIButton)
     {
         //调出历史记录页面
         NSLog("history")
