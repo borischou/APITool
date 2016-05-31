@@ -45,23 +45,27 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
         self.navigationItem.rightBarButtonItem = clearBarButton
         
         self.records = NSMutableArray()
-        records?.mutableArrayValueForKeyPath("records")
-        rac_valuesForKeyPath("records", observer: self)
-        
-        let recordSignal: RACSignal = self.rac_valuesAndChangesForKeyPath("records", options: NSKeyValueObservingOptions.New, observer: self)
-        recordSignal.subscribeNext { (tuple) -> Void in
-            if let tup = tuple as? RACTuple
-            {
-                let arr: NSMutableArray? = tup.first as? NSMutableArray
-                self.navigationItem.rightBarButtonItem?.enabled = arr?.count > 0 ? true : false
-            }
-        }
         
         self.fetchHistoryURLs()
         
-//        let validSignal = self.validTableDataRACSignal()
-//        validSignal.subscribeNext { (AnyObject) -> Void in
-//            self.navigationItem.rightBarButtonItem!.enabled = AnyObject.boolValue
+//        let recordNumber: NSNumber = NSNumber(integer: self.records!.count)
+//        let recordCountSignal: RACSignal = RACSignal.createSignal { (subscriber) -> RACDisposable! in
+//            subscriber.sendNext(recordNumber) //此处recordNumber默认自带__block属性 (Swift特有)
+//            subscriber.sendCompleted()
+//            return nil
+//        }
+//        recordCountSignal.subscribeNext { (value) in
+//            NSLog("here i am with \(value)")
+//            self.navigationItem.rightBarButtonItem?.enabled = value.integerValue > 0 ? true : false
+//        }
+        
+//        let recordSignal: RACSignal = RACSignal.createSignal { (subscriber) -> RACDisposable! in
+//            subscriber.sendNext(self.records)
+//            subscriber.sendCompleted()
+//            return nil
+//        }
+//        recordSignal.subscribeNext { (records) in
+//            self.navigationItem.rightBarButtonItem?.enabled = records.count > 0 ? true : false
 //        }
     }
     
