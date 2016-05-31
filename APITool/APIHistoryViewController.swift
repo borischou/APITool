@@ -20,7 +20,7 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
     var delegate: APIHistoryViewControllerDelegate?
     var tableView: UITableView?
     var records: NSMutableArray?
-    
+    var recordSignal: RACSignal?
     let reuseId = "historycell"
     
     override func viewDidLoad()
@@ -48,6 +48,8 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
         
         self.fetchHistoryURLs()
         
+        self.recordSignal = self.RACObserve(self, keyPath: "records")
+        
 //        let recordNumber: NSNumber = NSNumber(integer: self.records!.count)
 //        let recordCountSignal: RACSignal = RACSignal.createSignal { (subscriber) -> RACDisposable! in
 //            subscriber.sendNext(recordNumber) //此处recordNumber默认自带__block属性 (Swift特有)
@@ -64,12 +66,16 @@ class APIHistoryViewController: UIViewController, UITableViewDelegate, UITableVi
 //            subscriber.sendCompleted()
 //            return nil
 //        }
-//        recordSignal.subscribeNext { (records) in
-//            self.navigationItem.rightBarButtonItem?.enabled = records.count > 0 ? true : false
-//        }
+        self.recordSignal!.subscribeNext { (records) in
+            self.navigationItem.rightBarButtonItem?.enabled = records.count > 0 ? true : false
+        }
     }
     
     // MARK: Helpers
+    
+    func RACObserve(target: NSObject!, keyPath: String) -> RACSignal  {
+        return target.rac_valuesForKeyPath(keyPath, observer: target)
+    }
 
     func validTableDataRACSignal() -> RACSignal
     {
